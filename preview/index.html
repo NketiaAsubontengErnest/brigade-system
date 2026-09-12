@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5th Accra Brigade Company - Boys & Girls Brigade</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="../public/assets/css/public.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --secondary: #27ae60;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #333;
+        }
+
+        /* Hero */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(44,62,80,.92), rgba(52,152,219,.85)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><rect fill="%2334495e" width="800" height="600"/><text x="400" y="300" font-size="60" fill="rgba(255,255,255,0.05)" text-anchor="middle" font-family="sans-serif">BRIGADE</text></svg>') center/cover no-repeat;
+            color: #fff;
+            padding: 120px 0 80px;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+        }
+        .hero-section h1 { font-size: 3rem; font-weight: 800; line-height: 1.2; }
+
+        /* Section */
+        .section-header { margin-bottom: 40px; }
+        .section-header h2 { font-weight: 700; color: var(--primary); }
+        .section-header .divider { width: 60px; height: 3px; background: var(--accent); border-radius: 2px; }
+
+        /* Cards */
+        .feature-card {
+            border: none; border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,.08);
+            transition: all 0.3s; overflow: hidden;
+        }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(0,0,0,.15); }
+        .feature-card .card-icon {
+            width: 60px; height: 60px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+        }
+
+        /* Stat counter */
+        .stat-counter { text-align: center; padding: 30px 15px; }
+        .stat-counter .number { font-size: 2.5rem; font-weight: 800; color: var(--accent); }
+        .stat-counter .label { font-size: 0.9rem; color: #6c757d; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Event card */
+        .event-card { border-radius: 12px; overflow: hidden; border: 1px solid #eee; transition: all 0.3s; }
+        .event-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.1); }
+        .event-date-badge {
+            position: absolute; top: 12px; left: 12px; background: var(--accent);
+            color: #fff; padding: 8px 12px; border-radius: 8px; text-align: center; line-height: 1;
+        }
+        .event-date-badge .day { font-size: 1.5rem; font-weight: 700; display: block; }
+        .event-date-badge .month { font-size: 0.7rem; text-transform: uppercase; }
+
+        /* News card */
+        .news-card {
+            border: none; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0,0,0,.08); transition: all 0.3s;
+        }
+        .news-card:hover { transform: translateY(-3px); box-shadow: 0 6px 25px rgba(0,0,0,.12); }
+
+        /* Gallery */
+        .gallery-item { border-radius: 12px; overflow: hidden; position: relative; cursor: pointer; }
+        .gallery-item img { transition: transform 0.3s; }
+        .gallery-item:hover img { transform: scale(1.05); }
+
+        /* Timeline */
+        .timeline-item { position: relative; padding-left: 30px; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: 0; top: 5px;
+            width: 12px; height: 12px; border-radius: 50%;
+            background: var(--accent);
+        }
+        .timeline-item::after {
+            content: ''; position: absolute; left: 5px; top: 20px;
+            width: 2px; height: calc(100% - 10px);
+            background: #dee2e6;
+        }
+        .timeline-item:last-child::after { display: none; }
+
+        /* Section colors */
+        .badge-buds { background: #ff6b6b; }
+        .badge-explorers { background: #feca57; color: #333; }
+        .badge-junior { background: #48dbfb; }
+        .badge-senior { background: #0abde3; }
+        .badge-venturers { background: #5f27cd; }
+
+        /* Leader card */
+        .leader-card { text-align: center; }
+        .leader-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid var(--accent); }
+        .leader-card h6 { font-weight: 700; margin-top: 12px; }
+        .leader-card p { color: var(--accent); font-size: 0.85rem; font-weight: 500; }
+
+        /* Registration form */
+        .form-section { background: #f8f9fa; padding: 60px 0; }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
+            <i class="bi bi-shield-check fs-4 me-2 text-primary"></i>
+            <span>5th Accra Brigade</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" href="#hero">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#activities">Activities</a></li>
+                <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="#news">News</a></li>
+                <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                <li class="nav-item ms-lg-3"><a class="btn btn-primary btn-sm" href="#register">Join Us</a></li>
+                <li class="nav-item ms-2"><a class="nav-link" href="/login">Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="hero" class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="mb-3">5th Accra Brigade<br>Company</h1>
+                <p class="lead fst-italic mb-3">"Sure, Steadfast, Loyal and True"</p>
+                <p class="mb-4">Building Godly character, discipline, and leadership in young people through Christian fellowship, training, and community service since 1985.</p>
+                <div class="d-flex gap-3 flex-wrap">
+                    <a href="#register" class="btn btn-primary btn-lg">Join Us</a>
+                    <a href="#about" class="btn btn-outline-light btn-lg">Learn More</a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center mt-4 mt-lg-0">
+                <div class="bg-white bg-opacity-10 rounded-4 p-5 d-inline-block">
+                    <i class="bi bi-shield-check" style="font-size: 8rem; opacity: 0.9;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Statistics -->
+<section class="py-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-6 col-lg-3 stat-counter">
+                <div class="number">186</div>
+                <div class="label">Active Members</div>
+            </div>
+            <div class="col-6 col-lg-3 stat-counter">
+                <div class="number">5</div>
+                <div class="label">Sections</div>
+            </div>
+            <div class="col-6 col-lg-3 stat-counter">
+                <div class="number">12</div>
+                <div class="label">Officers</div>
+            </div>
+            <div class="col-6 col-lg-3 stat-counter">
+                <div class="number">41</div>
+                <div class="label">Years of Service</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About / Mission / Vision -->
+<section id="about" class="py-5 bg-light">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>About Us</h2>
+            <div class="divider mx-auto"></div>
+        </div>
+        <div class="row g-4 mb-5">
+            <div class="col-md-6">
+                <div class="card feature-card p-4 h-100">
+                    <div class="card-icon bg-primary bg-opacity-10 text-primary mb-3"><i class="bi bi-bullseye"></i></div>
+                    <h5 class="fw-bold">Our Mission</h5>
+                    <p class="text-muted mb-0">To develop young people through a balanced programme of spiritual, physical, mental, and social activities, helping them become responsible citizens and leaders in the church and community.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card feature-card p-4 h-100">
+                    <div class="card-icon bg-success bg-opacity-10 text-success mb-3"><i class="bi bi-eye"></i></div>
+                    <h5 class="fw-bold">Our Vision</h5>
+                    <p class="text-muted mb-0">To be a leading Christian youth organisation that shapes the next generation of leaders who are grounded in faith, discipline, and service to humanity.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card feature-card p-4 h-100 text-center">
+                    <div class="card-icon bg-danger bg-opacity-10 text-danger mx-auto mb-3"><i class="bi bi-heart"></i></div>
+                    <h6 class="fw-bold">Spiritual Growth</h6>
+                    <p class="text-muted small mb-0">Building strong Christian foundations through Bible study, prayer, and worship.</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card feature-card p-4 h-100 text-center">
+                    <div class="card-icon bg-warning bg-opacity-10 text-warning mx-auto mb-3"><i class="bi bi-lightning"></i></div>
+                    <h6 class="fw-bold">Physical Development</h6>
+                    <p class="text-muted small mb-0">Encouraging fitness through drill, sports, and outdoor activities.</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card feature-card p-4 h-100 text-center">
+                    <div class="card-icon bg-info bg-opacity-10 text-info mx-auto mb-3"><i class="bi bi-book"></i></div>
+                    <h6 class="fw-bold">Mental Training</h6>
+                    <p class="text-muted small mb-0">Developing knowledge and skills through badge work and training programmes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sections -->
+<section class="py-5">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>Our Sections</h2>
+            <div class="divider mx-auto"></div>
+            <p class="text-muted mt-3">We have five sections catering to different age groups</p>
+        </div>
+        <div class="row g-3 justify-content-center">
+            <div class="col-lg-2 col-md-4 col-6">
+                <div class="card feature-card p-3 text-center h-100">
+                    <div class="badge badge-buds text-white px-3 py-1 mb-2 d-inline-block">Ages 6-8</div>
+                    <h6 class="fw-bold">Buds</h6>
+                    <small class="text-muted">Little seeds of faith</small>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-6">
+                <div class="card feature-card p-3 text-center h-100">
+                    <div class="badge badge-explorers px-3 py-1 mb-2 d-inline-block">Ages 8-11</div>
+                    <h6 class="fw-bold">Explorers</h6>
+                    <small class="text-muted">Discovering God's world</small>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-6">
+                <div class="card feature-card p-3 text-center h-100">
+                    <div class="badge badge-junior text-white px-3 py-1 mb-2 d-inline-block">Ages 11-14</div>
+                    <h6 class="fw-bold">Juniors</h6>
+                    <small class="text-muted">Growing in faith</small>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-6">
+                <div class="card feature-card p-3 text-center h-100">
+                    <div class="badge badge-senior text-white px-3 py-1 mb-2 d-inline-block">Ages 14-17</div>
+                    <h6 class="fw-bold">Seniors</h6>
+                    <small class="text-muted">Building leadership</small>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-6">
+                <div class="card feature-card p-3 text-center h-100">
+                    <div class="badge badge-venturers text-white px-3 py-1 mb-2 d-inline-block">Ages 17-21</div>
+                    <h6 class="fw-bold">Venturers</h6>
+                    <small class="text-muted">Leading by example</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Activities -->
+<section id="activities" class="py-5 bg-light">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>Our Activities</h2>
+            <div class="divider mx-auto"></div>
+        </div>
+        <div class="row g-3">
+            <div class="col-lg-4 col-md-6">
+                <div class="card feature-card p-3">
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon bg-primary bg-opacity-10 text-primary me-3" style="width:48px;height:48px;min-width:48px;border-radius:10px;"><i class="bi bi-flag"></i></div>
+                        <div>
+                            <h6 class="fw-bold mb-0">Brigade Meeting</h6>
+                            <small class="text-muted">Weekly meetings every Saturday</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card feature-card p-3">
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon bg-success bg-opacity-10 text-success me-3" style="width:48px;height:48px;min-width:48px;border-radius:10px;"><i class="bi bi-book-half"></i></div>
+                        <div>
+                            <h6 class="fw-bold mb-0">Bible Study</h6>
+                            <small class="text-muted">Deepening our understanding of God's word</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card feature-card p-3">
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon bg-warning bg-opacity-10 text-warning me-3" style="width:48px;height:48px;min-width:48px;border-radius:10px;"><i class="bi bi-people"></i></div>
+                        <div>
+                            <h6 class="fw-bold mb-0">Drill &amp; Marching</h6>
+                            <small class="text-muted">Discipline and coordination training</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card feature-card p-3">
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon bg-danger bg-opacity-10 text-danger me-3" style="width:48px;height:48px;min-width:48px;border-radius:10px;"><i class="bi bi-trophy"></i></div>
+                        <div>
+                            <h6 class="fw-bold mb-0">Sports</h6>
+                            <small class="text-muted">Football, athletics, and team sports</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card feature-card p-3">
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon bg-info bg-opacity-10 text-info me-3" style="width:48px;height:48px;min-width:48px;border-radius:10px;"><i class="bi bi-heart-handshake"></i></div>
+                        <div>
+                            <h6 class="fw-bold mb-0">Community Service</h6>
+                            <small class="text-muted">Serving our community with love</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card feature-card p-3">
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon bg-secondary bg-opacity-10 text-secondary me-3" style="width:48px;height:48px;min-width:48px;border-radius:10px;"><i class="bi bi-award"></i></div>
+                        <div>
+                            <h6 class="fw-bold mb-0">Training &amp; Badges</h6>
+                            <small class="text-muted">Earning badges through skill development</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Upcoming Events -->
+<section id="events" class="py-5">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>Upcoming Events</h2>
+            <div class="divider mx-auto"></div>
+        </div>
+        <div class="row g-3">
+            <div class="col-lg-4 col-md-6">
+                <div class="card event-card position-relative">
+                    <div class="card-body">
+                        <div class="event-date-badge"><span class="day">15</span><span class="month">Sep</span></div>
+                        <h6 class="fw-bold mt-4">Annual Brigade Camp</h6>
+                        <p class="text-muted small mb-1">Three days of fellowship, training, and outdoor activities at Kwahu.</p>
+                        <small class="text-muted"><i class="bi bi-geo-alt me-1"></i>Kwahu Mountains</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card event-card position-relative">
+                    <div class="card-body">
+                        <div class="event-date-badge"><span class="day">01</span><span class="month">Oct</span></div>
+                        <h6 class="fw-bold mt-4">Cadet Parade</h6>
+                        <p class="text-muted small mb-1">Annual cadet inspection and parade ceremony.</p>
+                        <small class="text-muted"><i class="bi bi-geo-alt me-1"></i>Church Premises</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card event-card position-relative">
+                    <div class="card-body">
+                        <div class="event-date-badge"><span class="day">25</span><span class="month">Oct</span></div>
+                        <h6 class="fw-bold mt-4">Founders' Day Celebration</h6>
+                        <p class="text-muted small mb-1">Celebrating the legacy of our Brigade founders.</p>
+                        <small class="text-muted"><i class="bi bi-geo-alt me-1"></i>Main Auditorium</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Latest News -->
+<section id="news" class="py-5 bg-light">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>Latest News</h2>
+            <div class="divider mx-auto"></div>
+        </div>
+        <div class="row g-3">
+            <div class="col-lg-4 col-md-6">
+                <div class="card news-card h-100">
+                    <div class="card-img-top bg-primary bg-opacity-10 d-flex align-items-center justify-content-center" style="height:200px;">
+                        <i class="bi bi-newspaper text-primary" style="font-size:3rem;opacity:0.5;"></i>
+                    </div>
+                    <div class="card-body">
+                        <small class="text-muted"><i class="bi bi-calendar me-1"></i>August 28, 2026</small>
+                        <h6 class="fw-bold mt-1">New Members Welcome Ceremony Held</h6>
+                        <p class="text-muted small">The company welcomed 23 new members during the September intake ceremony at the church hall...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card news-card h-100">
+                    <div class="card-img-top bg-success bg-opacity-10 d-flex align-items-center justify-content-center" style="height:200px;">
+                        <i class="bi bi-trophy text-success" style="font-size:3rem;opacity:0.5;"></i>
+                    </div>
+                    <div class="card-body">
+                        <small class="text-muted"><i class="bi bi-calendar me-1"></i>August 20, 2026</small>
+                        <h6 class="fw-bold mt-1">Regional Drill Competition Results</h6>
+                        <p class="text-muted small">Our Senior Section won first place in the Greater Accra Regional Drill Competition held last weekend...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card news-card h-100">
+                    <div class="card-img-top bg-warning bg-opacity-10 d-flex align-items-center justify-content-center" style="height:200px;">
+                        <i class="bi bi-megaphone text-warning" style="font-size:3rem;opacity:0.5;"></i>
+                    </div>
+                    <div class="card-body">
+                        <small class="text-muted"><i class="bi bi-calendar me-1"></i>August 15, 2026</small>
+                        <h6 class="fw-bold mt-1">Annual Camp Registration Open</h6>
+                        <p class="text-muted small">Registration for the annual brigade camp is now open. Early bird discount available until September 5...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Announcements -->
+<section class="py-5">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>Announcements</h2>
+            <div class="divider mx-auto"></div>
+        </div>
+        <div class="row g-3">
+            <div class="col-md-4">
+                <div class="card feature-card p-3 border-start border-primary border-3">
+                    <div class="d-flex align-items-start">
+                        <i class="bi bi-megaphone-fill text-primary fs-4 me-3 mt-1"></i>
+                        <div>
+                            <h6 class="fw-bold">Monthly Dues Reminder</h6>
+                            <p class="text-muted small mb-1">September monthly dues of GH₵20 is now due. Please make payments before the 30th.</p>
+                            <small class="text-muted"><i class="bi bi-clock me-1"></i>September 1, 2026</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card feature-card p-3 border-start border-success border-3">
+                    <div class="d-flex align-items-start">
+                        <i class="bi bi-calendar-check-fill text-success fs-4 me-3 mt-1"></i>
+                        <div>
+                            <h6 class="fw-bold">Schedule Change Notice</h6>
+                            <p class="text-muted small mb-1">This week's Saturday meeting has been moved to Sunday due to the church harvest celebration.</p>
+                            <small class="text-muted"><i class="bi bi-clock me-1"></i>August 28, 2026</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card feature-card p-3 border-start border-warning border-3">
+                    <div class="d-flex align-items-start">
+                        <i class="bi bi-exclamation-triangle-fill text-warning fs-4 me-3 mt-1"></i>
+                        <div>
+                            <h6 class="fw-bold">Uniform Inspection</h6>
+                            <p class="text-muted small mb-1">All members are to report in full uniform for the quarterly inspection next Saturday.</p>
+                            <small class="text-muted"><i class="bi bi-clock me-1"></i>August 25, 2026</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Preview -->
+<section id="gallery" class="py-5 bg-light">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>Photo Gallery</h2>
+            <div class="divider mx-auto"></div>
+        </div>
+        <div class="row g-2">
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="gallery-item rounded overflow-hidden">
+                    <div class="bg-primary bg-opacity-20 d-flex align-items-center justify-content-center" style="height:200px;">
+                        <i class="bi bi-camera text-primary" style="font-size:2.5rem;opacity:0.6;"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="gallery-item rounded overflow-hidden">
+                    <div class="bg-success bg-opacity-20 d-flex align-items-center justify-content-center" style="height:200px;">
+                        <i class="bi bi-people text-success" style="font-size:2.5rem;opacity:0.6;"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="gallery-item rounded overflow-hidden">
+                    <div class="bg-warning bg-opacity-20 d-flex align-items-center justify-content-center" style="height:200px;">
+                        <i class="bi bi-flag text-warning" style="font-size:2.5rem;opacity:0.6;"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="gallery-item rounded overflow-hidden">
+                    <div class="bg-danger bg-opacity-20 d-flex align-items-center justify-content-center" style="height:200px;">
+                        <i class="bi bi-trophy text-danger" style="font-size:2.5rem;opacity:0.6;"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="gallery-item rounded overflow-hidden">
+                    <div class="bg-info bg-opacity-20 d-flex align-items-center justify-content-center" style="height:200px;">
+                        <i class="bi bi-music-note text-info" style="font-size:2.5rem;opacity:0.6;"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="gallery-item rounded overflow-hidden">
+                    <div class="bg-secondary bg-opacity-20 d-flex align-items-center justify-content-center" style="height:200px;">
+                        <i class="bi bi-book text-secondary" style="font-size:2.5rem;opacity:0.6;"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="gallery-item rounded overflow-hidden">
+                    <div class="bg-primary bg-opacity-10 d-flex align-items-center justify-content-center" style="height:200px;">
+                        <i class="bi bi-heart text-primary" style="font-size:2.5rem;opacity:0.6;"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="gallery-item rounded overflow-hidden">
+                    <div class="bg-success bg-opacity-10 d-flex align-items-center justify-content-center" style="height:200px;">
+                        <i class="bi bi-globe text-success" style="font-size:2.5rem;opacity:0.6;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Leadership -->
+<section class="py-5">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>Our Leadership</h2>
+            <div class="divider mx-auto"></div>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="leader-card">
+                    <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width:120px;height:120px;">
+                        <i class="bi bi-person-circle text-primary" style="font-size:4rem;"></i>
+                    </div>
+                    <h6>Capt. James Mensah</h6>
+                    <p>Company Captain</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="leader-card">
+                    <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width:120px;height:120px;">
+                        <i class="bi bi-person-circle text-success" style="font-size:4rem;"></i>
+                    </div>
+                    <h6>Lt. Grace Asante</h6>
+                    <p>Secretary</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="leader-card">
+                    <div class="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width:120px;height:120px;">
+                        <i class="bi bi-person-circle text-warning" style="font-size:4rem;"></i>
+                    </div>
+                    <h6>Sgt. Samuel Osei</h6>
+                    <p>Treasurer</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="leader-card">
+                    <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width:120px;height:120px;">
+                        <i class="bi bi-person-circle text-info" style="font-size:4rem;"></i>
+                    </div>
+                    <h6>Rev. Mrs. Abena Boateng</h6>
+                    <p>Chaplain</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Membership CTA -->
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-3">Ready to Join Our Brigade?</h2>
+        <p class="mb-4 mx-auto" style="max-width:600px;">Become part of a family that builds character, discipline, and leadership. Open to boys and girls ages 6-21.</p>
+        <a href="#register" class="btn btn-light btn-lg me-2">Register Now</a>
+        <a href="#about" class="btn btn-outline-light btn-lg">Learn More</a>
+    </div>
+</section>
+
+<!-- Registration Form -->
+<section id="register" class="form-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="section-header text-center">
+                    <h2>Register as a New Member</h2>
+                    <div class="divider mx-auto"></div>
+                    <p class="text-muted mt-3">Fill out the form below to apply for membership</p>
+                </div>
+                <div class="card feature-card p-4">
+                    <form id="registrationForm" onsubmit="handleRegistration(event)">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">First Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" required placeholder="Enter first name">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Middle Name</label>
+                                <input type="text" class="form-control" placeholder="Enter middle name">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Last Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" required placeholder="Enter last name">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Date of Birth <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Gender <span class="text-danger">*</span></label>
+                                <select class="form-select" required>
+                                    <option value="">Select gender</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Section <span class="text-danger">*</span></label>
+                                <select class="form-select" required>
+                                    <option value="">Select section</option>
+                                    <option>Buds (Ages 6-8)</option>
+                                    <option>Explorers (Ages 8-11)</option>
+                                    <option>Juniors (Ages 11-14)</option>
+                                    <option>Seniors (Ages 14-17)</option>
+                                    <option>Venturers (Ages 17-21)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Phone <span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" required placeholder="024 000 0000">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Email</label>
+                                <input type="email" class="form-control" placeholder="example@email.com">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Address <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" required placeholder="Full residential address">
+                            </div>
+                            <hr class="my-2">
+                            <div class="col-12">
+                                <h6 class="fw-bold text-primary"><i class="bi bi-person-hearts me-2"></i>Parent / Guardian Information</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Guardian Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" required placeholder="Full name of parent/guardian">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Relationship <span class="text-danger">*</span></label>
+                                <select class="form-select" required>
+                                    <option value="">Select relationship</option>
+                                    <option>Father</option>
+                                    <option>Mother</option>
+                                    <option>Guardian</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Guardian Phone <span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" required placeholder="024 000 0000">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Emergency Contact</label>
+                                <input type="tel" class="form-control" placeholder="Alternative emergency number">
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                                    <label class="form-check-label" for="agreeTerms">I agree to the Brigade rules and code of conduct</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary btn-lg w-100">
+                                    <i class="bi bi-send me-2"></i>Submit Registration
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="py-5">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>Contact Us</h2>
+            <div class="divider mx-auto"></div>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-4 text-center">
+                <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width:80px;height:80px;">
+                    <i class="bi bi-geo-alt-fill text-primary fs-2"></i>
+                </div>
+                <h6 class="fw-bold">Address</h6>
+                <p class="text-muted small">12 Independence Avenue<br>Accra, Greater Accra Region<br>Ghana</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width:80px;height:80px;">
+                    <i class="bi bi-telephone-fill text-success fs-2"></i>
+                </div>
+                <h6 class="fw-bold">Phone</h6>
+                <p class="text-muted small">+233 302 000 000<br>+233 24 000 0000</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width:80px;height:80px;">
+                    <i class="bi bi-envelope-fill text-warning fs-2"></i>
+                </div>
+                <h6 class="fw-bold">Email</h6>
+                <p class="text-muted small">info@5thaccrabrigade.org<br>captain@5thaccrabrigade.org</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-dark text-white pt-5 pb-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <h5 class="fw-bold mb-3"><i class="bi bi-shield-check me-2"></i>5th Accra Brigade</h5>
+                <p class="text-muted small">Building Godly character, discipline, and leadership in young people through Christian fellowship and community service.</p>
+                <p class="fst-italic text-primary small">"Sure, Steadfast, Loyal and True"</p>
+            </div>
+            <div class="col-lg-2 col-md-4 mb-4">
+                <h6 class="fw-bold mb-3">Quick Links</h6>
+                <ul class="list-unstyled small">
+                    <li class="mb-2"><a href="#about" class="text-muted text-decoration-none">About Us</a></li>
+                    <li class="mb-2"><a href="#register" class="text-muted text-decoration-none">Membership</a></li>
+                    <li class="mb-2"><a href="#events" class="text-muted text-decoration-none">Events</a></li>
+                    <li class="mb-2"><a href="#news" class="text-muted text-decoration-none">News</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-4 mb-4">
+                <h6 class="fw-bold mb-3">Contact</h6>
+                <ul class="list-unstyled small text-muted">
+                    <li class="mb-2"><i class="bi bi-geo-alt me-2"></i>12 Independence Avenue, Accra</li>
+                    <li class="mb-2"><i class="bi bi-telephone me-2"></i>+233 302 000 000</li>
+                    <li class="mb-2"><i class="bi bi-envelope me-2"></i>info@5thaccrabrigade.org</li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-4 mb-4">
+                <h6 class="fw-bold mb-3">Join Us</h6>
+                <p class="text-muted small">Ready to become a Brigade member?</p>
+                <a href="#register" class="btn btn-primary btn-sm">Register Now</a>
+                <div class="mt-3">
+                    <a href="#" class="text-muted me-2 fs-5"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-muted me-2 fs-5"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#" class="text-muted me-2 fs-5"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="text-muted me-2 fs-5"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr class="border-secondary">
+        <div class="text-center text-muted small">
+            &copy; 2026 5th Accra Brigade Company. All rights reserved.
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+
+// Registration form handler
+function handleRegistration(e) {
+    e.preventDefault();
+    // Show success modal
+    const modal = document.createElement('div');
+    modal.className = 'modal fade show d-block';
+    modal.style.background = 'rgba(0,0,0,0.5)';
+    modal.innerHTML = `
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-body text-center p-5">
+                    <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width:80px;height:80px;">
+                        <i class="bi bi-check-circle-fill text-success" style="font-size:2.5rem;"></i>
+                    </div>
+                    <h5 class="fw-bold">Registration Submitted!</h5>
+                    <p class="text-muted">Your registration has been submitted successfully. An officer will review your application and contact you shortly.</p>
+                    <button class="btn btn-primary" onclick="this.closest('.modal').remove()">Close</button>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+// Animate stats on scroll
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.stat-counter, .feature-card, .event-card, .news-card, .gallery-item').forEach(el => {
+    observer.observe(el);
+});
+
+// Counter animation
+function animateCounters() {
+    document.querySelectorAll('.stat-counter .number').forEach(counter => {
+        const target = parseInt(counter.textContent);
+        let current = 0;
+        const increment = Math.ceil(target / 50);
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                counter.textContent = target.toLocaleString();
+                clearInterval(timer);
+            } else {
+                counter.textContent = current.toLocaleString();
+            }
+        }, 30);
+    });
+}
+
+// Trigger counter animation when stats come into view
+const statsObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateCounters();
+            statsObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.3 });
+
+const statsSection = document.querySelector('.stat-counter')?.closest('section');
+if (statsSection) statsObserver.observe(statsSection);
+</script>
+
+</body>
+</html>

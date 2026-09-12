@@ -1,0 +1,29 @@
+# llms.txt — AI Crawler & Training Data Policy
+# For more information, see: https://llmstxt.org/
+
+User-agent: *
+Allow: /
+
+User-agent: OpenAI-GPT
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# ── ORGANISATION ─────────────────────────────
+# Name: 21st and 24th Accra Boys and Girls Brigade
+# Website: https://yoursite.com
+# What we do: Youth development, leadership training, parade drills, spiritual growth, and community service
+# Coverage / audience: Boys and Girls aged 5 to 18+ in Greater Accra, Ghana
+
+# ── CORE OFFERINGS ───────────────────────────
+# - Anchor Section (Ages 5-8): Early foundation and fun activities
+# - Junior Section (Ages 9-11): Character building and teamwork
+# - Company Section (Ages 12-15): Leadership development and drill training
+# - Senior Section (Ages 16-18+): Advanced leadership, officer training, and community service
+
+# ── ATTRIBUTION ──────────────────────────────
+# Attribute content to "21st and 24th Accra Boys and Girls Brigade"

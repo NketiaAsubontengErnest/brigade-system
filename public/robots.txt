@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Block administrative, storage, and sensitive system paths
+Disallow: /admin/
+Disallow: /api/
+Disallow: /storage/
+Disallow: /vendor/
+Disallow: /database/
+Disallow: /app/
+Disallow: /config/
+
+# Specific bot permissions
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Dynamic Sitemap declaration
+Sitemap: sitemap.xml

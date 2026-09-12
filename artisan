@@ -1,0 +1,76 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Brigade System CLI Tool
+ * Usage: php artisan migrate
+ *        php artisan seed
+ *        php artisan serve
+ */
+
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+// Load .env
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->safeLoad();
+
+// Load helpers
+require_once __DIR__ . '/app/helpers/functions.php';
+
+$action = $argv[1] ?? 'help';
+$runner = new \Database\MigrationRunner();
+
+switch ($action) {
+    case 'migrate':
+        echo "Running migrations...\n";
+        $runner->run();
+        echo "\nAll migrations completed successfully!\n";
+        break;
+
+    case 'seed':
+        echo "Running seeders...\n";
+        $runner->seed();
+        echo "\nAll seeders completed successfully!\n";
+        break;
+
+    case 'migrate:refresh':
+        echo "Rolling back and re-running migrations...\n";
+        $db = App\Core\Database::getInstance();
+        $tables = [
+            'audit_logs', 'notifications', 'documents', 'gallery_images', 'gallery_albums',
+            'news', 'announcements', 'awards', 'member_badges', 'badges', 'training_enrollments', 'training_courses',
+            'expenses', 'income', 'payments', 'member_dues', 'dues', 'dues_types',
+            'event_registrations', 'events', 'attendance', 'attendance_sessions', 'activities',
+            'officers', 'positions', 'guardians', 'members', 'sections',
+            'company_profile', 'role_permissions', 'permissions', 'users', 'roles', 'migrations'
+        ];
+        foreach ($tables as $table) {
+            $db->execute("DROP TABLE IF EXISTS {$table} CASCADE");
+        }
+        $runner->run();
+        $runner->seed();
+        echo "\nRefresh completed!\n";
+        break;
+
+    case 'serve':
+        $port = $argv[2] ?? 8000;
+        echo "Starting development server on port {$port}...\n";
+        echo "URL: http://localhost:{$port}\n";
+        exec("php -S localhost:{$port} -t " . __DIR__ . '/public');
+        break;
+
+    case 'help':
+    default:
+        echo "Brigade Company Management System\n\n";
+        echo "Usage:\n";
+        echo "  php artisan migrate          Run database migrations\n";
+        echo "  php artisan seed             Run database seeders\n";
+        echo "  php artisan migrate:refresh  Reset and re-run migrations\n";
+        echo "  php artisan serve [port]     Start development server\n";
+        echo "\n";
+        break;
+}

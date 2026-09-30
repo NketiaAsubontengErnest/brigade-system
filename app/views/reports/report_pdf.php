@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8"><style>
-body{font-family:'Helvetica',sans-serif;font-size:10px;color:#333}
+body{font-family:'Poppins';font-size:10px;color:#333}
 h1{color:#2c3e50;font-size:18px;margin-bottom:5px}
 h2{color:#3498db;font-size:14px;margin-bottom:10px}
 .header{text-align:center;margin-bottom:20px;border-bottom:2px solid #2c3e50;padding-bottom:15px}

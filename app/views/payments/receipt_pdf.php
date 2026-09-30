@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8"><style>
-body{font-family:'Helvetica',sans-serif;font-size:11px;color:#333;padding:20px}
+body{font-family:'Poppins';font-size:11px;color:#333;padding:20px}
 .receipt{max-width:500px;margin:0 auto;border:2px solid #2c3e50;padding:25px}
 .header{text-align:center;border-bottom:2px dashed #ddd;padding-bottom:15px;margin-bottom:15px}
 .logo{max-height:50px;margin-bottom:5px}

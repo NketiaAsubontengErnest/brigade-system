@@ -86,7 +86,7 @@ class EmailService
     {
         $subject = "Password Reset Request - Brigade Management System";
         $html = "
-            <div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;'>
+            <div style='font-family: \"Poppins\", Arial; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;'>
                 <h2 style='color: #0d6efd;'>Brigade Company Management System</h2>
                 <p>Hello " . htmlspecialchars($toName) . ",</p>
                 <p>We received a request to reset your account password. Click the button below to set a new password:</p>
@@ -112,7 +112,7 @@ class EmailService
     {
         $subject = "Welcome to the Brigade!";
         $html = "
-            <div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;'>
+            <div style='font-family: \"Poppins\", Arial; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;'>
                 <h2 style='color: #0d6efd;'>Welcome to Brigade Management System</h2>
                 <p>Hello " . htmlspecialchars($toName) . ",</p>
                 <p>Your member account has been successfully created and approved.</p>
@@ -134,7 +134,7 @@ class EmailService
         $subject = "Payment Receipt - " . ($payment['receipt_number'] ?? 'Receipt');
         $attachments = $pdfPath && file_exists($pdfPath) ? [$pdfPath => basename($pdfPath)] : [];
         $html = "
-            <div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;'>
+            <div style='font-family: \"Poppins\", Arial; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;'>
                 <h2 style='color: #198754;'>Payment Receipt Received</h2>
                 <p>Hello " . htmlspecialchars($toName) . ",</p>
                 <p>Thank you for your payment. Below are the payment details:</p>

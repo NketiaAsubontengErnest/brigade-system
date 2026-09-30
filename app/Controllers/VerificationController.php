@@ -22,7 +22,7 @@ class VerificationController extends Controller
 
         if (!$member) {
             http_response_code(404);
-            echo '<!DOCTYPE html><html><head><title>Not Found</title></head><body style="text-align:center;padding:50px;font-family:sans-serif;"><h1>Member Not Found</h1><p>This verification token is invalid or the member record does not exist.</p></body></html>';
+            echo '<!DOCTYPE html><html><head><title>Not Found</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"></head><body style="text-align:center;padding:50px;font-family:\'Poppins\';"><h1>Member Not Found</h1><p>This verification token is invalid or the member record does not exist.</p></body></html>';
             return;
         }
 

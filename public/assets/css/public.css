@@ -1,12 +1,11 @@
 /* ===================================================
    TYPOGRAPHY TOKENS
-   Display : Fraunces  - warm, high-contrast serif with real character
-   Body    : Plus Jakarta Sans - clean, friendly, highly legible
-   Swap the two values below to restyle the whole site at once.
+   Display : Poppins Font Family
+   Body    : Poppins Font Family
    =================================================== */
 :root {
-    --font-display: 'Fraunces', 'Playfair Display', Georgia, 'Times New Roman', serif;
-    --font-body: 'Plus Jakarta Sans', 'Source Sans 3', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-display: 'Poppins';
+    --font-body: 'Poppins';
 }
 
 /* ===================================================

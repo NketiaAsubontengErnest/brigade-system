@@ -7,7 +7,7 @@
     <?= favicon_tags() ?>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
             --auth-navy: #0a0f1d;
@@ -22,7 +22,7 @@
         }
         *, *::before, *::after { box-sizing: border-box; }
         body {
-            font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+            font-family: 'Poppins';
             margin: 0;
             background: var(--auth-cream);
             color: var(--auth-text);
@@ -81,7 +81,7 @@
             color: var(--auth-gold);
         }
         .auth-branding h1 {
-            font-family: 'Fraunces', 'Playfair Display', Georgia, serif;
+            font-family: 'Poppins';
             font-size: 2rem;
             font-weight: 700;
             margin-bottom: 8px;
@@ -122,7 +122,7 @@
             margin-bottom: 36px;
         }
         .auth-form-header h2 {
-            font-family: 'Fraunces', 'Playfair Display', Georgia, serif;
+            font-family: 'Poppins';
             font-size: 1.75rem;
             font-weight: 700;
             color: var(--auth-navy);

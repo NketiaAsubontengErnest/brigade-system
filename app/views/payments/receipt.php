@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8"><title>Receipt <?= e($payment['receipt_number']) ?></title>
-<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',sans-serif;padding:20px;font-size:13px}.receipt{max-width:400px;margin:0 auto;border:2px solid #2c3e50;padding:20px}.header{text-align:center;border-bottom:2px dashed #ddd;padding-bottom:15px;margin-bottom:15px}.header h2{color:#2c3e50;margin-bottom:5px}.logo{max-height:60px;margin-bottom:10px}table{width:100%;margin:10px 0}td{padding:4px 0}.text-right{text-align:right}.total{font-size:18px;font-weight:bold;border-top:2px solid #2c3e50;padding-top:10px;margin-top:10px}.footer{text-align:center;margin-top:20px;padding-top:15px;border-top:2px dashed #ddd;color:#666;font-size:11px}@media print{body{padding:0}.receipt{border:none}}</style></head>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Poppins';padding:20px;font-size:13px}.receipt{max-width:400px;margin:0 auto;border:2px solid #2c3e50;padding:20px}.header{text-align:center;border-bottom:2px dashed #ddd;padding-bottom:15px;margin-bottom:15px}.header h2{color:#2c3e50;margin-bottom:5px}.logo{max-height:60px;margin-bottom:10px}table{width:100%;margin:10px 0}td{padding:4px 0}.text-right{text-align:right}.total{font-size:18px;font-weight:bold;border-top:2px solid #2c3e50;padding-top:10px;margin-top:10px}.footer{text-align:center;margin-top:20px;padding-top:15px;border-top:2px dashed #ddd;color:#666;font-size:11px}@media print{body{padding:0}.receipt{border:none}}</style></head>
 <body>
 <div class="receipt">
     <div class="header">
